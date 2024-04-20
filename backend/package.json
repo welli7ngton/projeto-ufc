@@ -1,7 +1,7 @@
 {
   "name": "projeto-ufc",
   "version": "1.0.0",
-  "description": "",
+  "description": "- `npm init`\r - `npm install express --save`\r - `npm install express`",
   "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
