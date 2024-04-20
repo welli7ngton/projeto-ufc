@@ -2,6 +2,7 @@ const express = require('express');
 const app = express();
 const path = require('path');
 const bodyParser = require('body-parser');
+import userRouter from './routes/apiRoutes'
 const port = 3000;
 
 app.set('views', path.join(__dirname, 'views'));
@@ -13,16 +14,7 @@ app.get('/', (req, res) => {
   res.send('Hello World!');
 })
 
-app.route('/create_user')
-    .get((req, res) =>{
-        res.render('create_user')
-    })
-    .post((req, res) => {
-      console.log(req.body.username)
-      console.log(req.body.email)
-      console.log(req.body.password)
-      res.send('deu certo');
-    });
+app.use('/users', userRouter)
 
 app.listen(port, () => {
   console.log(`app listening on port ${port}`);
