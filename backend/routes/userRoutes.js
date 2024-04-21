@@ -8,6 +8,6 @@ const userRouter = Router()
 
 userRouter.get("/getUsers", getUsers)
 
-userRouter.get("/createUsers,", createUser)
+userRouter.get("/createUsers", createUser)
 
 export default userRouter;
