@@ -14,8 +14,9 @@ class userService {
         return users;
     
     }
-    createUser() {
-        
+    createUser(userName, email, password) {
+        new userModel(userName, email, password);
+        return 'usuário criado';
     }
 }
     
