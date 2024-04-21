@@ -1,4 +1,4 @@
-import userModel from "../models/user";
+import userModel from "../models/user.js";
 
 class userService {
     constructor() {}

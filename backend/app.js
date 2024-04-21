@@ -1,9 +1,14 @@
-const express = require('express');
+import express from 'express';
+import { fileURLToPath } from 'url';
+import { dirname } from 'path';
 const app = express();
-const path = require('path');
-const bodyParser = require('body-parser');
-import userRouter from './routes/apiRoutes'
+import path from 'path';
+import bodyParser from 'body-parser';
+import userRouter from "./routes/userRoutes.js";
 const port = 3000;
+
+const __filename = fileURLToPath(import.meta.url);
+const __dirname = dirname(__filename);
 
 app.set('views', path.join(__dirname, 'views'));
 
