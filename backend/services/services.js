@@ -1,4 +1,5 @@
 import userModel from "../models/user.js";
+import bodyParser from 'body-parser';
 
 class userService {
     constructor() {}
@@ -11,7 +12,12 @@ class userService {
             new userModel("ueliton", "ueliton@gmail.com", "235656")
         ];
         return users;
+    
+    }
+    createUser() {
+        
     }
 }
+    
 
 export default userService;

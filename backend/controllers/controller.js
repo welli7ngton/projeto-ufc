@@ -8,3 +8,12 @@ export function getUsers(req, res) {
         users: userServices.getAll()
     })
 }
+
+export function createUser(req, res) {
+    const userServices = new userService();
+    // console.log(userServices.getAll());
+    res.render("createUser",{
+        pageTitle: 'Create User',
+        users: userServices.createUser()
+    })
+}
