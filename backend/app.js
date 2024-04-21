@@ -1,10 +1,12 @@
 import express from 'express';
 import { fileURLToPath } from 'url';
 import { dirname } from 'path';
-const app = express();
+
 import path from 'path';
 import bodyParser from 'body-parser';
 import userRouter from "./routes/userRoutes.js";
+
+const app = express();
 const port = 3000;
 
 const __filename = fileURLToPath(import.meta.url);

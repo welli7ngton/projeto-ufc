@@ -5,6 +5,6 @@ import{
 
 const userRouter = Router()
 
-userRouter.get("/verUsuarios", getUsers)
+userRouter.get("/getUsers", getUsers)
 
 export default userRouter;
