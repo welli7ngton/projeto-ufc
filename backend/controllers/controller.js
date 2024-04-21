@@ -8,10 +8,10 @@ export function getUsers(req, res) {
     })
 }
 
-export function createUser(req, res) {
+export function createUser(req, res, userName, email, password) {
     const userServices = new userService();
     res.render("createUser",{
         pageTitle: 'Create User',
-        users: userServices.createUser()
+        msg: userServices.createUser(userName, email, password)
     })
 }
