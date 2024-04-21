@@ -1,14 +1,16 @@
+<!-- verUsuarios.ejs -->
 <!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+    <title><%= pageTitle %></title>
 </head>
 <body>
-    <% users.forEach(users) %>
-    <div class="user">
-
-    </div>
+    <h1><%= pageTitle %></h1>
+        <% users.forEach(function(user) { %>
+            <p>User: <%= user.userName %></p>
+            <p>Email: <%= user.email %></p>
+        <% }); %>
 </body>
 </html>
