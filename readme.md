@@ -7,4 +7,3 @@
 ## Execução:
 
 - `node app.js`
-- `aaaaaaaaaaa`
