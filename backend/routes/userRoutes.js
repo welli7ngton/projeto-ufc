@@ -3,6 +3,7 @@ import{
     getUsers,
     createUser,
     deleteUser,
+    viewProfile
 } from "../controllers/controller.js";
 
 const userRouter = Router()
@@ -33,5 +34,13 @@ userRouter.route("/deleteUser")
         const userId = req.body.id;
         deleteUser(req, res, userId);
     });
+
+userRouter.route('/Profile')
+    .get((req, res, id) => {
+        res.render("viewProfile",{
+            pageTitle: 'Profile',
+            user: viewProfile(id)
+        })
+    })
 
 export default userRouter;

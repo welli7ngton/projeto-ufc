@@ -32,6 +32,10 @@ class userService {
             return false;
         }
     }
+
+    vuewProfie(id){
+        return user = this.myUsers.findIndex(u => u.id === id);
+    }
 }
 
 export default userService;

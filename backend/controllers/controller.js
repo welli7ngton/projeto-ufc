@@ -30,3 +30,13 @@ export function deleteUser(req, res, id) {
         });
     }
 }
+
+export function viewProfile(req, res, id){
+    const __user = userService(id)
+    if (user !== undefined){
+        res.render("viewProfile", {
+            pageTitle: 'Profile',
+            user: __user
+        })
+    }
+}
