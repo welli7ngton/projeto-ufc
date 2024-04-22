@@ -8,8 +8,14 @@ import{
 
 const userRouter = Router()
 
-userRouter.get("/getUsers", getUsers)
-
+userRouter.route("/getUsers")
+    .get((req, res) =>{
+        res.render("verUsuarios",{
+        pageTitle: 'User list',
+        users: getUsers()
+        })
+    })
+    
 userRouter.route("/createUsers")
     .get((req,res) =>{
         res.render('createUser',{
@@ -20,8 +26,8 @@ userRouter.route("/createUsers")
         const username = req.body.username;
         const email = req.body.email;
         const password = req.body.password;
-        
-        createUser(req, res, username, email, password);
+        createUser(username, email, password);
+        res.redirect("getUsers")
     })
 
 userRouter.route("/deleteUser")
@@ -32,7 +38,11 @@ userRouter.route("/deleteUser")
     })
     .post((req, res) => { 
         const userId = req.body.id;
-        deleteUser(req, res, userId);
+        res.render("verUsuarios", {
+            pageTitle: "Users List",
+            users: deleteUser(userId),
+            msg: "deu bom"
+        })
     });
 
 userRouter.route('/Profile')

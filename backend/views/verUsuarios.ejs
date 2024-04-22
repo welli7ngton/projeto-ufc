@@ -7,6 +7,12 @@
     <title><%= pageTitle %></title>
 </head>
 <body>
+    <!-- <% if (msg) { %>
+        <p><%= msg %></p>
+    <% } 
+    %> else { %>
+        <%= msg = undefined %><
+    <% } %> -->
     <h1><%= pageTitle %></h1>
         <% users.forEach(function(user) { %>
             <p>User: <%= user.userName %></p>
