@@ -18,19 +18,12 @@ class userService {
 
     createUser(userName, email, password) {
         const nextId = this.myUsers.length + 1;
-        this.myUsers.push(new userModel(userName, email, password, nextId));
-        return 'usuário criado';
+        return  this.myUsers.push(new userModel(userName, email, password, nextId));
     }
 
     deleteUser(id) {
-        const index = this.myUsers.findIndex(u => u.id === id);
-
-        this.myUsers.splice(index, 1)[0];
-        if (index !== -1){
-            return true;
-        } else {
-            return false;
-        }
+        this.myUsers.splice(id, 1)[0];
+        return this.getAll()
     }
 
     vuewProfie(id){
