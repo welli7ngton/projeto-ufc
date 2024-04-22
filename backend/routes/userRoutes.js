@@ -1,7 +1,8 @@
 import { Router } from "express";
 import{
     getUsers,
-    createUser
+    createUser,
+    deleteUser,
 } from "../controllers/controller.js";
 
 const userRouter = Router()
@@ -22,6 +23,22 @@ userRouter.route("/createUsers")
         
         // Chamar createUser no controlador com os dados do usuário
         createUser(req, res, username, email, password);
+    })
+
+    userRouter.route("/deleteUser")
+    .get((req, res) => {
+        res.render("deleteUser", {
+            pageTitle: 'Delete User'
+        });
+    })
+    .post((req, res) => { 
+        const userId = req.body.id;
+        deleteUser(req, res, userId);
     });
+    
+
+    
+
+
 
 export default userRouter;
