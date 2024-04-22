@@ -21,11 +21,16 @@ class userService {
         this.myUsers.push(new userModel(userName, email, password, nextId));
         return 'usuário criado';
     }
+
     deleteUser(id) {
-        console.log("ID do usuário a ser excluído:", id);
         const index = this.myUsers.findIndex(u => u.id === id);
-        const deletedUser = this.myUsers.splice(index, 1)[0];
-        return true;
+
+        this.myUsers.splice(index, 1)[0];
+        if (index !== -1){
+            return true;
+        } else {
+            return false;
+        }
     }
 }
 

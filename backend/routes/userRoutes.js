@@ -16,16 +16,14 @@ userRouter.route("/createUsers")
         })
     })
     .post((req, res) => {
-        // Processar os dados do formulário
         const username = req.body.username;
         const email = req.body.email;
         const password = req.body.password;
         
-        // Chamar createUser no controlador com os dados do usuário
         createUser(req, res, username, email, password);
     })
 
-    userRouter.route("/deleteUser")
+userRouter.route("/deleteUser")
     .get((req, res) => {
         res.render("deleteUser", {
             pageTitle: 'Delete User'
@@ -35,10 +33,5 @@ userRouter.route("/createUsers")
         const userId = req.body.id;
         deleteUser(req, res, userId);
     });
-    
-
-    
-
-
 
 export default userRouter;

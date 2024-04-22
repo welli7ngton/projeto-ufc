@@ -18,7 +18,6 @@ export function createUser(req, res, userName, email, password) {
 }
 
 export function deleteUser(req, res, id) {
-    console.log("ID do usuário a ser excluído:", id); // Adicione esta linha
     if (userServices.deleteUser(id)) {
         res.render("verUsuarios", {
             pageTitle: 'User list',
@@ -26,7 +25,7 @@ export function deleteUser(req, res, id) {
         });
     } else {
         res.render("verUsuarios", {
-            pageTitle: 'falhou',
+            pageTitle: 'Nenhum usuário foi deletado.',
             users: userServices.getAll()
         });
     }
