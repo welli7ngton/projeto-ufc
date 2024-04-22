@@ -4,26 +4,29 @@ import bodyParser from 'body-parser';
 class userService {
     constructor() {
         this.myUsers = [
-            new userModel("joaozinho", "joao@gmail.com", "235656"),
-            new userModel("maria", "maria@gmail.com", "235656"),
-            new userModel("gton", "jgton@gmail.com", "235656"),
-            new userModel("ueliton", "ueliton@gmail.com", "235656"),
-            new userModel("marin", "karin@gmail.com", "235656")
+            new userModel("joaozinho", "joao@gmail.com", "235656", 1),
+            new userModel("maria", "maria@gmail.com", "235656", 2),
+            new userModel("gton", "jgton@gmail.com", "235656", 3),
+            new userModel("ueliton", "ueliton@gmail.com", "235656", 4),
+            new userModel("marin", "karin@gmail.com", "235656", 5)
         ];
     }
 
     getAll() {
-        console.log(this.myUsers)
         return this.myUsers;
     }
 
     createUser(userName, email, password) {
-        //console.log(this.myUsers.length);
-        this.myUsers.push(new userModel(userName, email, password));
-        //console.log(this.myUsers.length);
+        const nextId = this.myUsers.length + 1;
+        this.myUsers.push(new userModel(userName, email, password, nextId));
         return 'usuário criado';
     }
+    deleteUser(id) {
+        console.log("ID do usuário a ser excluído:", id);
+        const index = this.myUsers.findIndex(u => u.id === id);
+        const deletedUser = this.myUsers.splice(index, 1)[0];
+        return true;
+    }
 }
-    
 
 export default userService;
