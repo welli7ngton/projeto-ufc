@@ -1,5 +1,4 @@
 import userModel from "../models/user.js";
-import bodyParser from 'body-parser';
 
 class userService {
     constructor() {
@@ -23,11 +22,12 @@ class userService {
 
     deleteUser(id) {
         this.myUsers.splice(id, 1)[0];
+        console.log('estou na service')
         return this.getAll()
     }
 
     vuewProfie(id){
-        return user = this.myUsers.findIndex(u => u.id === id);
+        return this.myUsers.findIndex(u => u.id === id);
     }
 }
 
