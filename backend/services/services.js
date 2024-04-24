@@ -25,7 +25,7 @@ class userService {
         return this.getAll()
     }
 
-    vuewProfie(id){
+    viewProfile(id){
         return this.myUsers.findIndex(u => u.id === id);
     }
 }

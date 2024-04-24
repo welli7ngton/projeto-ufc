@@ -15,6 +15,11 @@ userRouter.route("/getUsers")
         users: getUsers()
         })
     })
+    .post((req, res) =>{
+        const userId = req.body.id
+        console.log(userId);
+        res.redirect("viewProfile")
+    })
     
 userRouter.route("/createUsers")
     .get((req,res) =>{
@@ -44,7 +49,7 @@ userRouter.route("/deleteUser")
         })
     });
 
-userRouter.route('/Profile')
+userRouter.route('/profile')
     .get((req, res, id) => {
         res.render("viewProfile",{
             pageTitle: 'Profile',
