@@ -25,7 +25,7 @@ export function deleteUser(id) {
     }
 }
 
-export function viewProfile(req, res, id){
+export function viewProfile(id){
     const __user = userService(id)
     if (user !== undefined){
         res.render("viewProfile", {

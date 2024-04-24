@@ -5,13 +5,23 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title><%= pageTitle %></title>
+    <style>
+        
+    </style>
 </head>
 <body>
     <!-- verificação de tipo de dado -->
     <h1><%= pageTitle %></h1>
         <% users.forEach(function(user) { %>
+        <div class="userData"> 
             <p>User: <%= user.userName %></p>
             <p>Email: <%= user.email %></p>
+            <form method="post">
+                <input type="hidden" name="id" value="<%= user.id %>">
+                <input type="submit" value="Ver Perfil">
+            </form>
+        </div>
         <% }); %>
+
 </body>
 </html>
