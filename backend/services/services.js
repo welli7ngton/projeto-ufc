@@ -22,7 +22,6 @@ class userService {
 
     deleteUser(id) {
         this.myUsers.splice(id, 1)[0];
-        console.log('estou na service')
         return this.getAll()
     }
 

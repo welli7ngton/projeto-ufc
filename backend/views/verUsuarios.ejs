@@ -8,9 +8,6 @@
 </head>
 <body>
     <!-- verificação de tipo de dado -->
-    <% if (typeof msg !== 'undefined') { %>
-        <p><%= msg %></p>
-    <% } %>
     <h1><%= pageTitle %></h1>
         <% users.forEach(function(user) { %>
             <p>User: <%= user.userName %></p>

@@ -38,20 +38,9 @@ userRouter.route("/deleteUser")
     })
     .post((req, res) => { 
         const userId = req.body.id;
-        console.log('recebi o id do formulário')
-        res.render("verUsuarios", {
+        res.render("deleteUser", {
             pageTitle: "Users List",
-            // aqui eu estou trabalhando com a função da controller, onde o retorno é uma lista
-            // como não estou armazenando esses dados em uma variável eu tive que tratar como essa sintaxe: deleteUser(userId)[0]
-            // imagine que isso é o mesmo que:
-            // variavel_em_memória = deleteUser(userId)[0]
-            // variavel_em_memória[0]
-            // é literalmente a mesma coisa, porém simplificada, é impossivel declarar uma variavel em memória enquanto
-            // renderizamos um template por antes de qualquer ação no site os templates são renderizados, logo, é impossível
-            // renderizar uma variável que não foi declarada.
-            // essa é a strack trace do que aconteceria se nós não fizessemos isso: `ReferenceError: variavel_em_memória is not defined`
-            users: deleteUser(userId)[0],
-            msg: deleteUser(userId)[1]
+            msg: deleteUser(userId)
         })
     });
 
