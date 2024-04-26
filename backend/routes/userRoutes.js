@@ -16,9 +16,8 @@ userRouter.route("/getUsers")
         })
     })
     .post((req, res) =>{
-        const userId = req.body.id
-        console.log(userId);
-        res.redirect("viewProfile")
+        const userId = req.body.id;
+        res.redirect(`profile/${userId}`);
     })
     
 userRouter.route("/createUsers")
@@ -49,11 +48,12 @@ userRouter.route("/deleteUser")
         })
     });
 
-userRouter.route('/profile')
-    .get((req, res, id) => {
+userRouter.route('/profile/:id')
+    .get((req, res) => {
+        const userId = req.params.id;
         res.render("viewProfile",{
             pageTitle: 'Profile',
-            user: viewProfile(id)
+            user: viewProfile(userId)
         })
     })
 

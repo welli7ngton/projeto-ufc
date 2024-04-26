@@ -25,8 +25,9 @@ class userService {
         return this.getAll()
     }
 
-    viewProfile(id){
-        return this.myUsers.findIndex(u => u.id === id);
+    viewProfile(id){        
+        const index = this.myUsers.findIndex(u => u.id === id) 
+        return this.myUsers[index]
     }
 }
 
