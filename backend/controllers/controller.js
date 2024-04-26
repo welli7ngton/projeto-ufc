@@ -26,11 +26,8 @@ export function deleteUser(id) {
 }
 
 export function viewProfile(id){
-    const __user = userService(id)
-    if (user !== undefined){
-        res.render("viewProfile", {
-            pageTitle: 'Profile',
-            user: __user
-        })
-    }
+    const user = userServices.viewProfile(parseInt(id));
+    if (user !== -1){
+       return user
+    } 
 }
