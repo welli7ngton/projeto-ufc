@@ -3,7 +3,8 @@ import{
     getUsers,
     createUser,
     deleteUser,
-    viewProfile
+    viewProfile,
+    updateProfile
 } from "../controllers/controller.js";
 
 const userRouter = Router()
@@ -37,7 +38,7 @@ userRouter.route("/createUsers")
 userRouter.route("/deleteUser")
     .get((req, res) => {
         res.render("deleteUser", {
-            pageTitle: 'Delete User'
+            pageTitle: 'Delete User',
         });
     })
     .post((req, res) => { 
@@ -50,11 +51,26 @@ userRouter.route("/deleteUser")
 
 userRouter.route('/profile/:id')
     .get((req, res) => {
-        const userId = req.params.id;
+        const userId = req.params.id; //params é uma informação que esta na URL
         res.render("viewProfile",{
             pageTitle: 'Profile',
             user: viewProfile(userId)
         })
+    })
+
+userRouter.route('/updateUser/:id')
+    .get((req, res) => {
+        console.log("estou na rota")
+        res.render("updateUser",{
+            pageTitle: 'atualizar dados'
+        })
+    })
+    .post((req, res) =>{
+        const newUserName = req.body.username;
+        const newEmail = req.body.email;
+        const id = req.params.id;
+        updateProfile(id, newUserName, newEmail);
+        res.redirect(id)
     })
 
 export default userRouter;

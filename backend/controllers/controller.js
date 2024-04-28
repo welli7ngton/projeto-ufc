@@ -12,11 +12,8 @@ export function createUser(userName, email, password) {
 }
 
 export function deleteUser(id) {
-    console.log('estou dentro da controller')
     const users = userServices.getAll();
-
     const index = users.findIndex(u => u.id == id);
-    console.log(index)
     if (index !== -1){
         userServices.deleteUser(index)
         return 'Usuário deletado'
@@ -27,7 +24,13 @@ export function deleteUser(id) {
 
 export function viewProfile(id){
     const user = userServices.viewProfile(parseInt(id));
-    if (user !== -1){
+    if (user !== -1){ //corrigir o erro dele nao existir 
        return user
-    } 
+    } else{
+
+    }
+}
+
+export function updateProfile(id, userName, email){
+    userServices.updateProfile(id, userName, email)
 }

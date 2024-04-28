@@ -29,6 +29,17 @@ class userService {
         const index = this.myUsers.findIndex(u => u.id === id) 
         return this.myUsers[index]
     }
+
+    updateProfile(id, username, email){
+        this.myUsers.map(
+            (value) => {
+                if(value.id === parseInt(id)){
+                    value.userName = username;
+                    value.email = email;
+                }
+            }
+        )
+    } 
 }
 
 export default userService;
