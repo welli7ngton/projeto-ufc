@@ -17,8 +17,8 @@
             <li><%= user.email %></li>
             <li><%= user.password %></li>
         </ul>
-        <form method="post" action="/users/updateUser/<%= user.id %>">
-            <input type="hidden" name="userId"  value="<%= user.id %>">
+        <form method="POST" action="/users/updateUser/<%= user.id %>">
+            <input type="hidden" name="id" value="<%= user.id %>">
             <input type="submit" value="Atualizar informações">
         </form>
     </div>

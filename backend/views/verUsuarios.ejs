@@ -14,12 +14,14 @@
 <body>
     <!-- verificação de tipo de dado -->
     <h1><%= pageTitle %></h1>
+    <form method="get" action="/users/deleteUser">
+        <input type="submit" value="deleteUser">
+    </form>
         <% users.forEach(function(user) { %>
         <div class="userData"> 
             <p>User: <%= user.userName %></p>
             <p>Email: <%= user.email %></p>
-            <form method="post">
-                <input type="hidden" name="id" value="<%= user.id %>">
+            <form method="post" action="/users/viewProfile/<%= user.id %>">
                 <input type="submit" value="Ver Perfil">
             </form>
         </div>

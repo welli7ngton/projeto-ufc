@@ -13,12 +13,15 @@
 </head>
 <body>
     <h1><%= pageTitle %></h1>
-    <form method="POST">
-        <label for="username">Username</label>
-        <input type="text" name="username">
-        <label for="email">Email</label>
-        <input type="email" name="email">
-        <input type="submit" value="Submit">
+    <form method="POST" action="/users/updateUser/<%= user.id %>">
+        <input type="hidden" name="id" value="<%= user.id %>">
+        <label for="username">Novo Nome de Usuário:</label>
+        <input type="text" name="username" value="<%= user.username %>">
+        <label for="email">Novo Email:</label>
+        <input type="email" name="email" value="<%= user.email %>">
+        <input type="submit" value="Atualizar informações">
     </form>
+    
+    <a href="/users/getUsers">Voltar para a página inicial</a>
 </body>
 </html>
