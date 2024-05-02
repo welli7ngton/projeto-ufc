@@ -21,7 +21,7 @@ class userService {
     }
 
     deleteUser(id) {
-        this.myUsers.splice(id, 1)[0];
+        this.myUsers.splice(id -1, 1)[0];
         return this.getAll()
     }
 
@@ -29,6 +29,15 @@ class userService {
         const index = this.myUsers.findIndex(u => u.id === id) 
         return this.myUsers[index]
     }
+
+    updateProfile(id, username, email) {
+        const userIndex = this.myUsers.findIndex(user => user.id === parseInt(id));
+        if (userIndex !== -1) {
+            this.myUsers[userIndex].username = username;
+            this.myUsers[userIndex].email = email;
+        }
+    }
+    
 }
 
 export default userService;
