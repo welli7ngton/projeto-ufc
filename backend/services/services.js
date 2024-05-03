@@ -26,8 +26,12 @@ class userService {
     }
 
     viewProfile(id){        
-        const index = this.myUsers.findIndex(u => u.id === id) 
-        return this.myUsers[index]
+        const index = this.myUsers.findIndex(u => u.id === id);
+        const user = this.myUsers[index];
+        if(user) {
+            return user
+        }
+        return false
     }
 
     updateProfile(id, username, email) {
@@ -35,6 +39,7 @@ class userService {
         if (userIndex !== -1) {
             this.myUsers[userIndex].userName = username;
             this.myUsers[userIndex].email = email;
+            return "Usuário alterado"
         } else {
             return "Usuário não encontrado"
         }

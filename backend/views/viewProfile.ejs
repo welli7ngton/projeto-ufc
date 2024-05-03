@@ -13,9 +13,11 @@
 <body>
     <div class="user-data">
         <h1><%= user.userName %></h1>
+        <% if (typeof msg !== 'undefined') { %>
+            <p><%= msg %></p>
+        <% } %>
         <ul>
             <li><%= user.email %></li>
-            <li><%= user.password %></li>
         </ul>
         <form method="get" action="/users/updateUser/<%= user.id %>">
             <input type="submit" value="Atualizar informações">
