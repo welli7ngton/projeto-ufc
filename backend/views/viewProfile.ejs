@@ -18,6 +18,7 @@
         <% } %>
         <ul>
             <li><%= user.email %></li>
+            <li><%= user.bio %></li>
         </ul>
         <form method="get" action="/users/updateUser/<%= user.id %>">
             <input type="submit" value="Atualizar informações">

@@ -32,7 +32,8 @@ export function createUser(req, res) {
     const username = req.body.username;
     const email = req.body.email;
     const password = req.body.password;
-    userServices.createUser(username, email, password);
+    const bio = req.body.bio;
+    userServices.createUser(username, email, password, bio);
     res.redirect("/users/getUsers");
 }
 
@@ -53,14 +54,14 @@ export function deleteUser(req, res) {
 export function updateProfileForm(req, res) {
     const userId = req.params.id;
     const _user = userServices.viewProfile(parseInt(userId));
-    console.log(_user)
     if(_user){
         res.render("updateUser", {
             pageTitle: 'Atualizar Informações',
             user: _user
         });
+    }else {
+        res.redirect("/users/notFound")
     }
-     res.redirect("/users/notFound")
 }
 
 
@@ -68,7 +69,8 @@ export function updateProfile(req, res) {
     const newUserName = req.body.username;
     const newEmail = req.body.email;
     const id = req.params.id;
-    const mensagem = userServices.updateProfile(id, newUserName, newEmail)
+    const bio = req.body.bio
+    const mensagem = userServices.updateProfile(id, newUserName, newEmail, bio)
     res.render(`viewProfile`, {
         pageTitle: 'PageTitle',
         msg: mensagem, 

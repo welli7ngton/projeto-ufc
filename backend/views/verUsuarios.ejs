@@ -21,6 +21,7 @@
         <div class="userData"> 
             <p>User: <%= user.userName %></p>
             <p>Email: <%= user.email %></p>
+            <p>Bio: <%= user.bio %></p>
             <form method="post" action="/users/viewProfile/<%= user.id %>">
                 <input type="submit" value="Ver Perfil">
             </form>
