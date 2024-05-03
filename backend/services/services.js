@@ -33,8 +33,10 @@ class userService {
     updateProfile(id, username, email) {
         const userIndex = this.myUsers.findIndex(user => user.id === parseInt(id));
         if (userIndex !== -1) {
-            this.myUsers[userIndex].username = username;
+            this.myUsers[userIndex].userName = username;
             this.myUsers[userIndex].email = email;
+        } else {
+            return "Usuário não encontrado"
         }
     }
     

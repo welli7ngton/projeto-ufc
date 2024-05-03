@@ -13,7 +13,7 @@
 </head>
 <body>
     <h1><%= pageTitle %></h1>
-    <form method="POST" action="/users/updateUser/<%= user.id %>">
+    <form method="POST">
         <input type="hidden" name="id" value="<%= user.id %>">
         <label for="username">Novo Nome de Usuário:</label>
         <input type="text" name="username" value="<%= user.username %>">
