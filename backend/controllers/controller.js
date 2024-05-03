@@ -37,9 +37,6 @@ export function createUser(req, res) {
 }
 
 
-
-
-
 export function deleteUserForm(req, res) {
     res.render("deleteUser", {
         pageTitle: 'Delete User'
@@ -55,9 +52,9 @@ export function deleteUser(req, res) {
 
 export function updateProfileForm(req, res) {
     const userId = req.params.id;
-    console.log("estou no form")
     res.render("updateUser", {
         pageTitle: 'Atualizar Informações',
+        user: userServices.viewProfile(parseInt(userId))
     });
 }
 
@@ -67,5 +64,5 @@ export function updateProfile(req, res) {
     const newEmail = req.body.email;
     const id = req.params.id;
     userServices.updateProfile(id, newUserName, newEmail);
-    res.redirect("/users/getUsers");
+    res.redirect(`/users/viewProfile/${id}`);
 }
