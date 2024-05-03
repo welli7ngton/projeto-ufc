@@ -8,7 +8,8 @@ import{
     deleteUser,
     viewProfile,
     updateProfileForm,
-    updateProfile
+    updateProfile,
+    userNotFound
 } from "../controllers/controller.js";
 
 const userRouter = Router()
@@ -24,6 +25,6 @@ userRouter.post("/deleteUser", deleteUser);
 userRouter.route("/updateUser/:id")
     .get(updateProfileForm)
     .post(updateProfile);
-
+userRouter.get("/notFound", userNotFound)
 
 export default userRouter;
