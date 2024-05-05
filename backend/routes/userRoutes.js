@@ -1,5 +1,4 @@
 import { Router } from "express";
-import services from "../services/services.js";
 import{
     getUsers,
     createUser,
@@ -10,7 +9,7 @@ import{
     updateProfileForm,
     updateProfile,
     userNotFound
-} from "../controllers/controller.js";
+} from "../controllers/userController.js";
 
 const userRouter = Router()
 
