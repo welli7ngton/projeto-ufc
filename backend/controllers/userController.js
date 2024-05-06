@@ -12,12 +12,15 @@ export function viewProfile(req, res) {
     const userId = req.params.id; 
     const user = userServices.viewProfile(parseInt(userId));
     if (user) {
-        res.render("viewProfile", {
-            pageTitle: "Profile",
-            user: user
-        });
+        res.json({
+            username: user.userName, 
+            email: user.email,
+            bio: user.bio
+        }).status(200)    
     } else {
-        res.redirect("/users/notFound")    
+        res.json({
+            msg: 'usuário não encontrado'
+        }).status(404)    
     }
 }
 
@@ -78,5 +81,8 @@ export function updateProfile(req, res) {
 }
 
 export function userNotFound(req, res) {
-    res.render('notFound')
+    // res.render('notFound')
+    res.json({
+        msg: 'Não encontrado'
+    })
 }

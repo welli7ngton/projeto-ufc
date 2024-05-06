@@ -24,6 +24,6 @@ userRouter.post("/deleteUser", deleteUser);
 userRouter.route("/updateUser/:id")
     .get(updateProfileForm)
     .post(updateProfile);
-userRouter.get("/notFound", userNotFound)
+userRouter.get("/notFound", userNotFound);
 
 export default userRouter;
