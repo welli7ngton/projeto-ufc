@@ -69,7 +69,7 @@ export function deleteUser(req, res) {
 //     }
 // }
 
-
+// TODO: LMEBRAR DE FAZER UMA ROTA 'PUT' COMO FOI FEITO NO DELETE
 export function updateProfile(req, res) {
     res.json({
         msg: userServices.updateProfile(
