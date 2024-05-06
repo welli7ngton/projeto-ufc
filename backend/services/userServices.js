@@ -17,11 +17,13 @@ class userService {
 
     createUser(userName, email, password, bio) {
         const nextId = this.myUsers.length + 1;
-        return  this.myUsers.push(new userModel(userName, email, password, bio, nextId));
+        return this.myUsers.push(new userModel(userName, email, password, bio, nextId));
     }
 
     deleteUser(id) {
-        this.myUsers.splice(id -1, 1)[0];
+        this.myUsers = this.myUsers.filter(user => {
+            if (user.id !== id) return user
+        })
         return this.getAll()
     }
 
@@ -45,7 +47,6 @@ class userService {
             return "Usuário não encontrado"
         }
     }
-    
 }
 
 export default userService;
