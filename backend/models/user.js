@@ -3,7 +3,7 @@ export default class userModel {
         this.userName = userName;
         this.email = email;
         this.password = password;
-        this.bio = bio
+        this.bio = bio;
         this.id = id;
     }
 }
