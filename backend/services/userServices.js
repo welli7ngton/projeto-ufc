@@ -22,9 +22,10 @@ class userService {
 
     deleteUser(id) {
         this.myUsers = this.myUsers.filter(user => {
-            if (user.id !== id) return user
+            if (user.id !== id) 
+                return "Usuário deletado " + id
         })
-        return this.getAll()
+        return "Nenhum usuário encontado"
     }
 
     viewProfile(id){        

@@ -15,16 +15,10 @@ import{
 const userRouter = Router()
 
 userRouter.get("/getUsers", getUsers);
-userRouter.route("/viewProfile/:id")
-    .get(viewProfile)
-    .post(viewProfile);
-// userRouter.get("/createUser", createUserForm);
+userRouter.get("/viewProfile/:id", viewProfile)
 userRouter.post("/createUser", createUser);
-// userRouter.get("/deleteUser", deleteUserForm);
 userRouter.delete("/deleteUser", deleteUser);
-userRouter.route("/updateUser/:id")
-    // .get(updateProfileForm)
-    .post(updateProfile);
-// userRouter.get("/notFound", userNotFound);
+userRouter.put("/updateUser/:id", updateProfile)
+
 
 export default userRouter;

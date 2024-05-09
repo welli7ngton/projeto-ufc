@@ -26,13 +26,6 @@ export function viewProfile(req, res) {
 }
 
 
-// export function createUserForm(_, res) {
-//         res.render('createUser', {
-//         pageTitle: 'Create User'
-//     })
-// }
-
-
 export function createUser(req, res) {
     userServices.createUser(req.body.username, req.body.email, req.body.password, req.body.bio)
     res.json({
@@ -40,36 +33,14 @@ export function createUser(req, res) {
     })
 }
 
-
-// export function deleteUserForm(_, res) {
-//     res.render("deleteUser", {
-//         pageTitle: 'Delete User'
-//     })
-// }
-
-
 export function deleteUser(req, res) {
-    userServices.deleteUser(req.body.id);
+    const msg = userServices.deleteUser(req.body.id);
     res.json({
-        msg: "Usuário deletado "+`(${req.body.id})`
+        msg: msg
     })
 }
 
 
-// export function updateProfileForm(req, res) {
-//     const userId = req.params.id;
-//     const _user = userServices.viewProfile(parseInt(userId));
-//     if(_user){
-//         res.render("updateUser", {
-//             pageTitle: 'Atualizar Informações',
-//             user: _user
-//         });
-//     }else {
-//         res.redirect("/users/notFound")
-//     }
-// }
-
-// TODO: LMEBRAR DE FAZER UMA ROTA 'PUT' COMO FOI FEITO NO DELETE
 export function updateProfile(req, res) {
     res.json({
         msg: userServices.updateProfile(
@@ -80,10 +51,3 @@ export function updateProfile(req, res) {
         )
     }).status(200)
 }
-
-
-// export function userNotFound(_, res) {
-//     res.json({
-//         msg: 'Não encontrado'
-//     })
-// }
