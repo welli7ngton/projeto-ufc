@@ -16,11 +16,12 @@
     "url": "https://github.com/welli7ngton/projeto-ufc/issues"
   },
   "homepage": "https://github.com/welli7ngton/projeto-ufc#readme",
-  "dependencies": {
+  "type": "module",
+  "devDependencies": {
+    "sqlite": "^5.1.1",
     "body-parser": "^1.20.2",
     "debug": "^4.3.4",
     "ejs": "^3.1.10",
     "express": "^4.19.2"
-  },
-  "type": "module"
+  }
 }
