@@ -1,4 +1,5 @@
 import userModel from "../models/user.js";
+import conn from "../database/database.cjs"
 
 class userService {
     constructor() {
@@ -16,8 +17,14 @@ class userService {
     }
 
     createUser(userName, email, password, bio) {
-        const nextId = this.myUsers.length + 1;
-        return this.myUsers.push(new userModel(userName, email, password, bio, nextId));
+
+        // const nextId = this.myUsers.length + 1;
+        conn.serialize((eee, err) => {
+            const querry = `INSERT INTO users (username, email, password, bio) VALUES (?, ?, ?, ?)`
+            const values = [userName, email, password, bio]
+            conn.run(querry, values)
+        })
+        // return this.myUsers.push(new userModel(userName, email, password, bio, nextId));
     }
 
     deleteUser(id) {
