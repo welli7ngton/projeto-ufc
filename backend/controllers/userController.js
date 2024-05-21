@@ -2,10 +2,14 @@ import userService from "../services/userServices.js"
 const userServices = new userService()
 
 
-export function getUsers(_, res) {
-    res.json({
-        users: userServices.getAll()
-    }).status(200)
+export async function getUsers(_, res) {
+  try {
+    const users = await userServices.getAll();
+    res.status(200).json({ users });
+  } catch (error) {
+    console.error('Error fetching users, ', error);
+    res.status(500).json({err: error})
+  }
 }
 
 
