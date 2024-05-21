@@ -1,5 +1,11 @@
 import userModel from "../models/user.js";
 import conn from "../database/database.cjs"
+import { response } from "express";
+
+const errorHandler = (res, error) => {
+    console.log('database error: ', error);
+    res.status(500).send('EWIFNEIVKWofefopejfoejmviknd-OSKMCVDMSKS');
+}
 
 class userService {
     constructor() {
@@ -12,17 +18,29 @@ class userService {
         ];
     }
 
-    getAll() {
-        return this.myUsers;
+    getAll(res) {
+       return new Promise((resolve, reject) => {
+        const query = `SELECT * FROM users`;
+        conn.all(query, (error, rows) => {
+            if(error) {
+                reject(error);
+            } else {
+                resolve(rows)
+            }
+        })
+       })
     }
 
     createUser(userName, email, password, bio) {
 
         // const nextId = this.myUsers.length + 1;
         conn.serialize((eee, err) => {
-            const querry = `INSERT INTO users (username, email, password, bio) VALUES (?, ?, ?, ?)`
+            try {const querry = `INSERT INTO users (username, email, password, bio) VALUES (?, ?, ?, ?)`
             const values = [userName, email, password, bio]
-            conn.run(querry, values)
+            conn.run(querry, values)}
+            catch (err) {
+                console.log(err, "paysandu")
+            }
         })
         // return this.myUsers.push(new userModel(userName, email, password, bio, nextId));
     }
