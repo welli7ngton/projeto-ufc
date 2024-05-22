@@ -46,11 +46,23 @@ class userService {
     }
 
     deleteUser(id) {
-        this.myUsers = this.myUsers.filter(user => {
-            if (user.id !== id) 
-                return "Usuário deletado " + id
-        })
-        return "Nenhum usuário encontado"
+        return new Promise((resolve, reject) => {
+            if (!id) {
+                reject("ID de usuário não fornecido");
+                return;
+            }
+    
+            const query = `DELETE FROM users WHERE id = ?`;
+            conn.run(query, [id], function(err) {
+                if (err) {
+                    reject(err);
+                } else if (this.changes > 0) {
+                    resolve("Usuário deletado " + id);
+                } else {
+                    resolve("Nenhum usuário encontrado com o ID " + id);
+                }
+            });
+        });
     }
 
     viewProfile(id){        

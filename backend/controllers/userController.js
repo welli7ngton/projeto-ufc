@@ -37,11 +37,25 @@ export function createUser(req, res) {
     })
 }
 
+
+
 export function deleteUser(req, res) {
-    const msg = userServices.deleteUser(req.body.id);
-    res.json({
-        msg: msg
-    })
+    const userId = req.body.id;
+    if (!userId) {
+        res.status(400).json({ msg: 'ID de usuário não fornecido' });
+        return;
+    }
+
+    userServices.deleteUser(userId).then(msg => {
+        res.json({
+            msg: msg
+        });
+    }).catch(error => {
+        res.status(500).json({
+            msg: 'Erro ao deletar o usuário',
+            error: error
+        });
+    });
 }
 
 
