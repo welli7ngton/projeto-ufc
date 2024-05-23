@@ -24,19 +24,6 @@ export async function viewProfile(req, res) {
         res.status(500).json({err: error,
         })
     }
-
-    
-    // if (user) {
-    //     res.json({
-    //         username: user.userName, 
-    //         email: user.email,
-    //         bio: user.bio
-    //     }).status(200)  
-    // } else {
-    //     res.json({
-    //         msg: 'Usuário não encontrado'
-    //     }).status(404)    
-    // }
 }
 
 
@@ -69,26 +56,18 @@ export function deleteUser(req, res) {
 }
 
 
-export function updateProfile(req, res) {
+export async function updateProfile(req, res) {
     try {
-        req.status(200).json({user: userServices.updateProfile(
+        const user = await userServices.updateProfile(
             req.params.id,
             req.body.username,
             req.body.email,
             req.body.bio
-        )})
-    } catch {(error) => {
+        )
+        res.status(200).json({user: user })
+    } catch (error) {
         res.status(500).json({
             error: error
         });
-    }}
-
-    // res.json({
-    //     msg: userServices.updateProfile(
-    //     req.params.id,
-    //     req.body.username,
-    //     req.body.email,
-    //     req.body.bio
-    // )
-    // }).status(200)
+    }
 }
