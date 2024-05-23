@@ -7,26 +7,36 @@ export async function getUsers(_, res) {
     const users = await userServices.getAll();
     res.status(200).json({ users });
   } catch (error) {
-    console.error('Error fetching users, ', error);
+    console.error(error);
     res.status(500).json({err: error})
   }
 }
 
 
-export function viewProfile(req, res) {
-    const userId = req.params.id; 
-    const user = userServices.viewProfile(parseInt(userId));
-    if (user) {
-        res.json({
-            username: user.userName, 
-            email: user.email,
-            bio: user.bio
-        }).status(200)  
-    } else {
-        res.json({
-            msg: 'Usuário não encontrado'
-        }).status(404)    
+export async function viewProfile(req, res) {
+    try {
+        const userId = req.params.id; 
+        const user = await userServices.viewProfile(parseInt(userId));
+        res.status(200).json({user: user,
+        })
+    } catch (error) {
+        console.error(error);
+        res.status(500).json({err: error,
+        })
     }
+
+    
+    // if (user) {
+    //     res.json({
+    //         username: user.userName, 
+    //         email: user.email,
+    //         bio: user.bio
+    //     }).status(200)  
+    // } else {
+    //     res.json({
+    //         msg: 'Usuário não encontrado'
+    //     }).status(404)    
+    // }
 }
 
 
@@ -60,12 +70,25 @@ export function deleteUser(req, res) {
 
 
 export function updateProfile(req, res) {
-    res.json({
-        msg: userServices.updateProfile(
+    try {
+        req.status(200).json({user: userServices.updateProfile(
             req.params.id,
             req.body.username,
             req.body.email,
             req.body.bio
-        )
-    }).status(200)
+        )})
+    } catch {(error) => {
+        res.status(500).json({
+            error: error
+        });
+    }}
+
+    // res.json({
+    //     msg: userServices.updateProfile(
+    //     req.params.id,
+    //     req.body.username,
+    //     req.body.email,
+    //     req.body.bio
+    // )
+    // }).status(200)
 }
