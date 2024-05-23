@@ -26,7 +26,7 @@ class userService {
             const values = [userName, email, password, bio]
             this.dbConnection.run(querry, values)}
             catch (err) {
-                console.log(err)
+                console.error(err)
             }
         })
     }
@@ -52,13 +52,6 @@ class userService {
     }
 
     viewProfile(id){
-
-        // const index = this.myUsers.findIndex(u => u.id === id);
-        // const user = this.myUsers[index];
-        // if(user) {
-        //     return user
-        // }
-        // return false
         return new Promise((resolve, reject)=>{
             const querry = 'SELECT * FROM users WHERE id = ?'
             const values = [id,]
@@ -71,31 +64,23 @@ class userService {
         })
         
     }
-
+    
     updateProfile(id, username, email, bio) {
-        console.log('CHeguei na service')
-        return new Promise((resolve, reject) =>{
-            const querry = 'UPDATE users SET username = ?, email = ?, bio = ? WHERE id = ?'
-            const values = [username, email, bio, id]
-            this.dbConnection.run(querry, values), (err, rows) => {
-                if (err){
-                    reject(err)
+        return new Promise((resolve, reject) => {
+            const query = 'UPDATE users SET username = ?, email = ?, bio = ? WHERE id = ?';
+            const values = [username, email, bio, id];
+            this.dbConnection.run(query, values, function(err) { 
+                if (this.changes === 0) {
+                    reject({error: 'Erro desconhecido'});
+                } else {
+                    resolve({ msg: 'Usuário alterado' });
                 }
-                resolve(rows)
-            }
-
-        })
-
-
-        // if (userIndex !== -1) {
-        //     this.myUsers[userIndex].userName = username;
-        //     this.myUsers[userIndex].email = email;
-        //     this.myUsers[userIndex].bio = bio;
-        //     return "Usuário alterado"
-        // } else {
-        //     return "Usuário não encontrado"
-        // }
+            });
+        });
     }
+    
 }
+    
+
 
 export default userService;
