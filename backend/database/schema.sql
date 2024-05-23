@@ -6,11 +6,14 @@ DROP TABLE IF EXISTS users;
 CREATE TABLE users (
   id INTEGER PRIMARY KEY AUTOINCREMENT,
   username TEXT NOT NULL,
-  email TEXT UNIQUE NOT NULL,
+  email TEXT NOT NULL,
   password TEXT NOT NULL,
   bio TEXT NULL,
   created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
 );
+
+INSERT INTO users (username, email, password, bio) VALUES ('joao', 'joao@example.com', 'password1', 'Bio for Joao'), ('maria', 'maria@example.com', 'password2', 'Bio for Maria'), ('jose', 'jose@example.com', 'password3', 'Bio for Jose'), ('ana', 'ana@example.com', 'password4', 'Bio for Ana'), ('carlos', 'carlos@example.com', 'password5', 'Bio for Carlos'), ('fernanda', 'fernanda@example.com', 'password6', 'Bio for Fernanda'), ('roberto', 'roberto@example.com', 'password7', 'Bio for Roberto'), ('patricia', 'patricia@example.com', 'password8', 'Bio for Patricia'), ('lucas', 'lucas@example.com', 'password9', 'Bio for Lucas'), ('juliana', 'juliana@example.com', 'password10', 'Bio for Juliana');
+
 
 
 -- CREATE TABLE movies (
