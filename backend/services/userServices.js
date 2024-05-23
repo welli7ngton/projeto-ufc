@@ -1,29 +1,18 @@
 import userModel from "../models/user.js";
-import conn from "../database/database.cjs"
-import { response } from "express";
+import { SingletonDatabaseConnection } from "../database/database.js";
 
-const errorHandler = (res, error) => {
-    console.log('database error: ', error);
-    res.status(500).send('EWIFNEIVKWofefopejfoejmviknd-OSKMCVDMSKS');
-}
 
 class userService {
     constructor() {
-        this.myUsers = [
-            new userModel("joaozinho", "joao@gmail.com", "235656","minha bio", 1),
-            new userModel("maria", "maria@gmail.com", "235656","minha bio", 2),
-            new userModel("gton", "jgton@gmail.com", "235656","minha bio", 3),
-            new userModel("ueliton", "ueliton@gmail.com", "235656","minha bio", 4),
-            new userModel("marin", "karin@gmail.com", "235656","minha bio", 5)
-        ];
+        this.dbConnection = SingletonDatabaseConnection.getDbConnection()
     }
 
-    getAll(res) {
+    getAll() {
        return new Promise((resolve, reject) => {
         const query = `SELECT * FROM users`;
-        conn.all(query, (error, rows) => {
-            if(error) {
-                reject(error);
+        this.dbConnection.all(query, (err, rows) => {
+            if(err) {
+                reject(err);
             } else {
                 resolve(rows)
             }
@@ -32,17 +21,14 @@ class userService {
     }
 
     createUser(userName, email, password, bio) {
-
-        // const nextId = this.myUsers.length + 1;
-        conn.serialize((eee, err) => {
+        this.dbConnection.serialize((eee, err) => {
             try {const querry = `INSERT INTO users (username, email, password, bio) VALUES (?, ?, ?, ?)`
             const values = [userName, email, password, bio]
-            conn.run(querry, values)}
+            this.dbConnection.run(querry, values)}
             catch (err) {
-                console.log(err, "paysandu")
+                console.log(err)
             }
         })
-        // return this.myUsers.push(new userModel(userName, email, password, bio, nextId));
     }
 
     deleteUser(id) {
@@ -53,7 +39,7 @@ class userService {
             }
     
             const query = `DELETE FROM users WHERE id = ?`;
-            conn.run(query, [id], function(err) {
+            this.dbConnection.run(query, [id], function(err) {
                 if (err) {
                     reject(err);
                 } else if (this.changes > 0) {
@@ -65,25 +51,50 @@ class userService {
         });
     }
 
-    viewProfile(id){        
-        const index = this.myUsers.findIndex(u => u.id === id);
-        const user = this.myUsers[index];
-        if(user) {
-            return user
-        }
-        return false
+    viewProfile(id){
+
+        // const index = this.myUsers.findIndex(u => u.id === id);
+        // const user = this.myUsers[index];
+        // if(user) {
+        //     return user
+        // }
+        // return false
+        return new Promise((resolve, reject)=>{
+            const querry = 'SELECT * FROM users WHERE id = ?'
+            const values = [id,]
+            this.dbConnection.all(querry, values, (err, rows) =>{
+                if (err) {
+                    reject(err)
+                }
+                resolve(rows)
+            })
+        })
+        
     }
 
     updateProfile(id, username, email, bio) {
-        const userIndex = this.myUsers.findIndex(user => user.id === parseInt(id));
-        if (userIndex !== -1) {
-            this.myUsers[userIndex].userName = username;
-            this.myUsers[userIndex].email = email;
-            this.myUsers[userIndex].bio = bio;
-            return "Usuário alterado"
-        } else {
-            return "Usuário não encontrado"
-        }
+        console.log('CHeguei na service')
+        return new Promise((resolve, reject) =>{
+            const querry = 'UPDATE users SET username = ?, email = ?, bio = ? WHERE id = ?'
+            const values = [username, email, bio, id]
+            this.dbConnection.run(querry, values), (err, rows) => {
+                if (err){
+                    reject(err)
+                }
+                resolve(rows)
+            }
+
+        })
+
+
+        // if (userIndex !== -1) {
+        //     this.myUsers[userIndex].userName = username;
+        //     this.myUsers[userIndex].email = email;
+        //     this.myUsers[userIndex].bio = bio;
+        //     return "Usuário alterado"
+        // } else {
+        //     return "Usuário não encontrado"
+        // }
     }
 }
 
