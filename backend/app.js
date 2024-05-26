@@ -5,6 +5,7 @@ import { dirname } from 'path';
 import path from 'path';
 import bodyParser from 'body-parser';
 import userRouter from "./routes/userRoutes.js";
+import movieRouter from "./routes/movieRoutes.js";
 
 const app = express();
 const port = 3000;
@@ -22,7 +23,7 @@ app.get('/', (req, res) => {
 })
 
 app.use('/users', userRouter)
-
+app.use('/movies', movieRouter);
 
 app.listen(port, () => {
   console.log(`app listening on port ${port}`);
