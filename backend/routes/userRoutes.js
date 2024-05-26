@@ -1,14 +1,10 @@
 import { Router } from "express";
-import{
+import {
     getUsers,
     createUser,
-    // createUserForm,
-    // deleteUserForm,
     deleteUser,
     viewProfile,
-    // updateProfileForm,
     updateProfile,
-    // userNotFound
 } from "../controllers/userController.js";
 
 
