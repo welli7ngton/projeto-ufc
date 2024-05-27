@@ -28,7 +28,7 @@ export async function viewProfile(req, res) {
 
 
 export function createUser(req, res) {
-    userServices.createUser(req.body.username, req.body.email, req.body.password, req.body.bio)
+    userServices.createUser([req.body.username, req.body.email, req.body.password, req.body.bio])
     res.json({
         msg: 'Novo usuário cadastrado'
     })
@@ -59,10 +59,10 @@ export function deleteUser(req, res) {
 export async function updateProfile(req, res) {
     try {
         const user = await userServices.updateProfile(
-            req.params.id,
-            req.body.username,
+           [req.body.username,
             req.body.email,
-            req.body.bio
+            req.body.bio,
+            req.params.id]
         )
         res.status(200).json({user: user })
     } catch (error) {
