@@ -11,20 +11,20 @@ const __dirname = dirname(__filename);
 const dbPath = path.resolve(__dirname, 'instance/database.db');
 
 
-export class SingletonDatabaseConnection {
+export class DatabaseConnection {
     static connection = null;
 
     constructor() {
-        if (SingletonDatabaseConnection.connection) {
-            throw new Error("Use SingletonDatabaseConnection.getDbConnection() to get the single instance of this class.");
+        if (DatabaseConnection.connection) {
+            throw new Error("Use DatabaseConnection.getDbConnection() to get the single instance of this class.");
         }
-        SingletonDatabaseConnection.connection = new sqlite3.Database(dbPath);
+        DatabaseConnection.connection = new sqlite3.Database(dbPath);
     }
 
     static getDbConnection() {
-        if (!SingletonDatabaseConnection.connection) {
-            new SingletonDatabaseConnection();
+        if (!DatabaseConnection.connection) {
+            new DatabaseConnection();
         }
-        return SingletonDatabaseConnection.connection;
+        return DatabaseConnection.connection;
     }
 }
