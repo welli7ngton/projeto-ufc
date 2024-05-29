@@ -1,5 +1,6 @@
 DROP TABLE IF EXISTS users;
--- DROP TABLE IF EXISTS movies;
+DROP TABLE IF EXISTS movies;
+DROP TABLE IF EXISTS cart;
 -- DROP TABLE IF EXISTS purchases;
 
 
@@ -55,3 +56,11 @@ VALUES
 --   FOREIGN KEY (user_id) REFERENCES users(id),
 --   FOREIGN KEY (movie_id) REFERENCES movies(id)
 -- );
+
+CREATE TABLE cart (
+  id INTEGER PRIMARY KEY AUTOINCREMENT,
+  movie_id INTEGER,
+  user_id INTEGER,
+  FOREIGN KEY (user_id) REFERENCES users(id),
+  FOREIGN KEY (movie_id) REFERENCES movies(id)
+)
