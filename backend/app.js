@@ -22,7 +22,7 @@ app.get('/', (req, res) => {
   res.send('Hello World!');
 })
 
-app.use('/users', userRouter)
+app.use('/users', userRouter);
 app.use('/movies', movieRouter);
 
 app.listen(port, () => {
