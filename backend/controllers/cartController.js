@@ -8,7 +8,5 @@ export async function addToCart(req, res){
 
 
 export async function getCart(_, res){
-    // const ansr = await cartServices.getCart()
-    // console.log(ansr)
     res.send(await cartServices.getCart())
 }
