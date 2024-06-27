@@ -1,6 +1,8 @@
 <template>
-  <div>
-    <MoviePoster :movieTitle="movieTitle" @image-loaded="displayImage" />
+  <div id="img-movie">
+    <router-link :to="'/MovieView/' + movieId">
+      <MoviePoster :movieId="movieId" @image-loaded="displayImage" @movie-id="saveMovieId" id="img"/>
+    </router-link>
   </div>
 </template>
 
@@ -14,32 +16,35 @@ export default {
     MoviePoster
   },
   props: {
-    movieTitle: {
-      type: String,
+    movieId: {
+      type: Number,
       required: true
     }
   },
   setup(props) {
     const image = ref(null);
+    const movieId = ref(props.movieId);
 
     const displayImage = (imageUrl) => {
       console.log('Image received:', imageUrl);
       image.value = imageUrl;
     };
 
+    const saveMovieId = (id) => {
+      console.log('Movie ID received:', id);
+      movieId.value = id;
+    };
+
     return {
       image,
-      displayImage
+      movieId,
+      displayImage,
+      saveMovieId
     };
   }
 };
 </script>
 
 <style scoped>
-img {
-  width: 250px;
-  height: 350px;
-  object-fit: cover;
-  margin: 10px 0;
-}
+
 </style>

@@ -1,26 +1,12 @@
 <template>
   <div id="app">
-    <Header />
-    <Banner />
-    <Carrossel />
-    <Footer />
+    <router-view />
   </div>
 </template>
 
 <script>
-import Header from './components/header.vue';
-import Footer from './components/footer.vue';
-import Banner from './components/banner.vue';
-import Carrossel from './components/carrossel.vue';
-
 export default {
-  name: 'App',
-  components: {
-    Header,
-    Footer,
-    Banner,
-    Carrossel
-  }
+  name: 'App'
 };
 </script>
 

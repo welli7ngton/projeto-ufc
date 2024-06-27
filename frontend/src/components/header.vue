@@ -1,7 +1,12 @@
 <template>
+
   <div class="header">
     <div class="logo-links">
-      <div class="logo"><a href=""><img src="../../public/img/E-Motion.svg" alt="logo e-motion"></a></div>
+      <router-link to="/" class="logo">
+        <a href="">
+          <img src="../../public/img/E-Motion.svg" alt="logo e-motion">
+        </a>
+      </router-link>
       <nav class="nav-links">
         <a href="#">Inicio</a>
         <a href="#">Categoria</a>
@@ -51,12 +56,13 @@ export default {
   display: flex;
   align-items: center;
 }
+
 .nav-links a {
-  font-family:'SF pro display'   ;
+  font-family: 'SF pro display';
   margin: 0px 10px;
   color: white;
   text-decoration: none;
-  font-size: 15px ;
+  font-size: 15px;
 }
 
 .icon {
