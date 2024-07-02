@@ -1,7 +1,7 @@
 import { createRouter, createWebHistory } from 'vue-router';
 import HomeView from '../views/HomeView.vue';
 import MovieView from '../views/MovieView.vue';
-
+import AddMovie from '../views/AddMovie.vue';
 const routes = [
   {
     path: '/',
@@ -13,7 +13,12 @@ const routes = [
     name: 'Movie',
     component: MovieView,
     props: true
+  },{
+    path: '/AddMovie',
+    name: 'AddMovie',
+    component: AddMovie
   }
+
 ];
 
 const router = createRouter({

@@ -1,20 +1,10 @@
 <template>
-  <div class="movie-details">
-    <h2>{{ movieDetails.title }}</h2>
-    <p>{{ movieDetails.plot }}</p>
-    <p>Released: {{ movieDetails.released }}</p>
-    <p>Runtime: {{ movieDetails.runtime }} minutes</p>
-    <p>Genre: {{ movieDetails.genre }}</p>
-    <p>Director: {{ movieDetails.director }}</p>
-    <p>Writer: {{ movieDetails.writer }}</p>
-    <p>Country: {{ movieDetails.country }}</p>
-    <p>Awards: {{ movieDetails.awards }}</p>
-    <p>IMDB Rating: {{ movieDetails.imdbRating }}</p>
-  </div>
+
 </template>
 
 <script>
-import { ref } from 'vue';
+import axios from 'axios';
+
 
 export default {
   name: 'MovieDetails',
@@ -40,8 +30,13 @@ export default {
       }
     };
   },
+  watch: {
+    movieId: 'fetchMovieDetails'
+  },
   methods: {
     async fetchMovieDetails() {
+      if (!this.movieId) return;
+
       const accessToken = 'Bearer eyJhbGciOiJIUzI1NiJ9.eyJhdWQiOiJiZTcwNzliOWVkYWEwMzMyMGZmYjEwZGIwNDc3YzAyNiIsIm5iZiI6MTcxOTQwNzI3OS43OTM2NTcsInN1YiI6IjY2NzgwNmQzYmY4YjVmZmI0MmZjMjYxNCIsInNjb3BlcyI6WyJhcGlfcmVhZCJdLCJ2ZXJzaW9uIjoxfQ.ZQ9kyGPn4CWGg0AUNIv04LUqI1O0Ai_lUjlwnxHwW3Y'; // Substitua pelo seu token de acesso válido
       const movieUrl = `https://api.themoviedb.org/3/movie/${this.movieId}?language=pt-BR`;
       const creditsUrl = `https://api.themoviedb.org/3/movie/${this.movieId}/credits`;
@@ -79,8 +74,32 @@ export default {
           awards: movieData.awards || '',
           imdbRating: movieData.vote_average || ''
         };
+        console.log(this.movieDetails)
+        // Enviar detalhes do filme ao backend para adicionar ao banco de dados
+        if (this.movieDetails.title !== "") {
+          axios.post('http://localhost:3000/movies/createMovie', {
+            title: this.movieDetails.title,
+            plot: this.movieDetails.plot,
+            released: this.movieDetails.released,
+            runtime: this.movieDetails.runtime,
+            gender: this.movieDetails.genre,
+            director: this.movieDetails.director,
+            writer: this.movieDetails.writer,
+            country: this.movieDetails.country,
+            imdbRating: this.movieDetails.imdbRating
+          }, { timeout: 10000 })
+            .then(response => {
+              console.log('Filme adicionado com sucesso ao banco de dados', response.data);
+            })
+            .catch(error => {
+              console.error('Erro ao adicionar filme:', error);
+            });
+        }
+
+
+
       } catch (error) {
-        console.error('Error fetching movie details:', error);
+        console.error('Error fetching movie details or adding to database:', error);
       }
     },
     getDirector(crew) {
