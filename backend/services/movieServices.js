@@ -19,10 +19,11 @@ class movieService {
         });
     }
     createMovies(listOfAtributes) {
+        listOfAtributes.push(25)
         if (verificationOfFormAtributes(listOfAtributes)) {
             this.dbConnection.serialize((eee, err) => {
                 try {
-                    const querry = `INSERT INTO movies (title, plot, released, runtime, gender, director, poster, writer, country, awards, imdbRating, price) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)`
+                    const querry = `INSERT INTO movies (idTMDB, title, plot, released, runtime, gender, director, writer, country, imdbRating, price) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?)`
                     this.dbConnection.run(querry, listOfAtributes)
                 }
                 catch (err) {
