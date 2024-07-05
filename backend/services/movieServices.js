@@ -23,7 +23,7 @@ class movieService {
         if (verificationOfFormAtributes(listOfAtributes)) {
             this.dbConnection.serialize((eee, err) => {
                 try {
-                    const querry = `INSERT INTO movies (idTMDB, title, plot, released, runtime, gender, director, writer, country, imdbRating, price) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?)`
+                    const querry = `INSERT INTO movies (idTMDB, title, plot, released, runtime, gender, director, writer, country, imdbRating, price) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)`
                     this.dbConnection.run(querry, listOfAtributes)
                 }
                 catch (err) {
@@ -59,7 +59,7 @@ viewProfile(id) {
         return "forneça um ID"
     }
     return new Promise((resolve, reject) => {
-        const querry = 'SELECT * FROM movies Where id = ?'
+        const querry = 'SELECT * FROM movies Where idTMDB = ?'
         const values = [id,]
         this.dbConnection.all(querry, values, (err, rows) => {
             if (err) {

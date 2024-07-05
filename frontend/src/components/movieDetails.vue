@@ -17,6 +17,7 @@ export default {
   data() {
     return {
       movieDetails: {
+        idTMDB: '',
         title: '',
         plot: '',
         released: '',
@@ -63,6 +64,7 @@ export default {
         const creditsData = await creditsResponse.json();
 
         this.movieDetails = {
+          idTMDB: this.movieId || '',
           title: movieData.title || '',
           plot: movieData.overview || '',
           released: movieData.release_date || '',
@@ -78,6 +80,7 @@ export default {
         // Enviar detalhes do filme ao backend para adicionar ao banco de dados
         if (this.movieDetails.title !== "") {
           axios.post('http://localhost:3000/movies/createMovie', {
+            idTMDB: this.movieDetails.idTMDB,
             title: this.movieDetails.title,
             plot: this.movieDetails.plot,
             released: this.movieDetails.released,
