@@ -12,7 +12,16 @@ export async function getMovies(_, res) {
 }
 
 export async function createMovie(req, res) {
-    const result = movieServices.createMovies([req.body.title, req.body.plot, req.body.released, req.body.runtime, req.body.gender, req.body.director, req.body.poster, req.body.writer, req.body.country, req.body.awards, req.body.imdbRating, req.body.price]);
+    const result = movieServices.createMovies([req.body.idTMDB,
+        req.body.title,
+        req.body.plot,
+        req.body.released,
+        req.body.runtime, 
+        req.body.gender,
+        req.body.director,
+        req.body.writer,
+        req.body.country,
+        req.body.imdbRating]);
     res.json({
         msg: result
     })

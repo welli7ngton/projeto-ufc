@@ -16,26 +16,24 @@ CREATE TABLE users (
 INSERT INTO users (username, email, password, bio) VALUES ('joao', 'joao@example.com', 'password1', 'Bio for Joao'), ('maria', 'maria@example.com', 'password2', 'Bio for Maria'), ('jose', 'jose@example.com', 'password3', 'Bio for Jose'), ('ana', 'ana@example.com', 'password4', 'Bio for Ana'), ('carlos', 'carlos@example.com', 'password5', 'Bio for Carlos'), ('fernanda', 'fernanda@example.com', 'password6', 'Bio for Fernanda'), ('roberto', 'roberto@example.com', 'password7', 'Bio for Roberto'), ('patricia', 'patricia@example.com', 'password8', 'Bio for Patricia'), ('lucas', 'lucas@example.com', 'password9', 'Bio for Lucas'), ('juliana', 'juliana@example.com', 'password10', 'Bio for Juliana');
 
 
-
 CREATE TABLE movies (
   id INTEGER PRIMARY KEY AUTOINCREMENT,
+  idTMDB INTEGER NOT NULL,
   title TEXT NOT NULL,
   plot TEXT NULL,
   released TEXT NULL,
   runtime TEXT NULL,
   gender TEXT NULL,
   director TEXT NULL,
-  poster TEXT NULL,
   writer TEXT NULL,
   country TEXT NULL,
-  awards TEXT NULL,
   imdbRating FLOAT,
   price FLOAT NOT NULL DEFAULT 25.00,
   created TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP
  );
 
 
-INSERT INTO movies (title, plot, released, runtime, gender, director, poster, writer, country, awards, imdbRating, price) 
+INSERT INTO movies (title, plot, released, runtime, gender, director, writer, country, imdbRating, price) 
 VALUES 
 ('Inception', 'A thief who steals corporate secrets through the use of dream-sharing technology.', '2010-07-16', '148 min', 'Action, Sci-Fi, Thriller', 'Christopher Nolan', 'poster1.jpg', 'Christopher Nolan', 'USA', 'Oscar for Best Cinematography', 8.8, 29.99), 
 ('The Matrix', 'A computer hacker learns from mysterious rebels about the true nature of his reality.', '1999-03-31', '136 min', 'Action, Sci-Fi', 'Lana Wachowski, Lilly Wachowski', 'poster2.jpg', 'Lana Wachowski, Lilly Wachowski', 'USA', 'Oscar for Best Film Editing', 8.7, 24.99), 
