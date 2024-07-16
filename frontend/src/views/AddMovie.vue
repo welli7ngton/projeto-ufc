@@ -3,9 +3,9 @@
     <div class="container">
       <div id="details">
         <form @submit.prevent="submitMovieId">
-          <label for="idMovie">Digite o ID do filme</label>
-          <input type="number" v-model="movieId">
-          <input type="submit" value="Enviar ID">
+          <label class="itemForm" for="idMovie">Digite o ID do filme</label>
+          <input class="itemForm" type="number" v-model="movieId">
+          <input class="itemForm" type="submit" value="Enviar ID">
         </form>
         <MovieDetails :movieId="movieId" id="MovieInfo" />
       </div>
@@ -32,8 +32,6 @@
     },
     methods: {
       submitMovieId() {
-        // This will trigger the MovieDetails component to fetch new data
-        this.$forceUpdate();
       }
     }
   };
@@ -48,26 +46,18 @@
   .container {
     display: flex;
     padding-top: 70px;
-    margin-left: 10%;
-    margin-right: 10%;
+    justify-content: center;
   }
   
-  #details {
-    width: 50%;
-    height: auto;
+  form {
+    display: flex;
+    flex-direction: column;
+    padding-top: 10%;
+    text-align: center;
+    justify-content:center;
   }
-  #MovieInfo {
-    text-align: justify;
-  }
-  
-  #imgDetails {
-    margin-left: 11%;
-  }
-  
-  .movie-poster-details :deep(img) {
-    width: 25vw!important;
-    height: auto !important;
-    border-radius: 3%;
+  .itemForm {
+    margin-top: 4%;
   }
   </style>
   
