@@ -33,14 +33,14 @@ export default {
   },
   data() {
     return {
-      movie: null // Inicializa como null
+      movie: null 
     };
   },
   methods: {
     viewMovie(id) {
       this.axios.get(`http://localhost:3000/movies/viewMovie/${id}`)
         .then(response => {
-          this.movie = response.data.movie[0]; // Atribui o objeto do filme à propriedade 'movie'
+          this.movie = response.data.movie[0];
         })
         .catch(error => {
           console.error(error);

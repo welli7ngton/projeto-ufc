@@ -1,10 +1,9 @@
 <template>
-
+  <p>{{ errorMessage }}</p>
 </template>
 
 <script>
 import axios from 'axios';
-
 
 export default {
   name: 'MovieDetails',
@@ -28,7 +27,9 @@ export default {
         country: '',
         awards: '',
         imdbRating: ''
-      }
+      },
+      errorMessage: '',
+      successMessage: ''
     };
   },
   watch: {
@@ -76,8 +77,7 @@ export default {
           awards: movieData.awards || '',
           imdbRating: movieData.vote_average || ''
         };
-        console.log(this.movieDetails)
-        // Enviar detalhes do filme ao backend para adicionar ao banco de dados
+
         if (this.movieDetails.title !== "") {
           axios.post('http://localhost:3000/movies/createMovie', {
             idTMDB: this.movieDetails.idTMDB,
@@ -92,17 +92,25 @@ export default {
             imdbRating: this.movieDetails.imdbRating
           }, { timeout: 10000 })
             .then(response => {
-              console.log('Filme adicionado com sucesso ao banco de dados', response.data);
+              if (response.data.success) {
+                this.successMessage = response.data.message;
+                this.errorMessage = '';
+              } else {
+                this.errorMessage = response.data.message;
+                this.successMessage = '';
+              }
             })
             .catch(error => {
               console.error('Erro ao adicionar filme:', error);
+              this.errorMessage = error.response ? error.response.data.message : 'Erro ao tentar adicionar o filme. Verifique a conexão ou tente novamente mais tarde.';
+              this.successMessage = '';
             });
         }
 
-
-
       } catch (error) {
         console.error('Error fetching movie details or adding to database:', error);
+        this.errorMessage = 'Erro ao buscar detalhes do filme ou adicionar ao banco de dados.';
+        this.successMessage = '';
       }
     },
     getDirector(crew) {
@@ -121,7 +129,14 @@ export default {
 </script>
 
 <style scoped>
+
 .movie-details {
   color: white;
+}
+.success-message {
+  color: green;
+}
+.error-message {
+  color: red;
 }
 </style>
