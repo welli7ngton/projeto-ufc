@@ -35,19 +35,12 @@ class userService {
 
     deleteUser(id) {
         return new Promise((resolve, reject) => {
-            if (!id) {
-                reject("ID de usuário não fornecido");
-                return;
-            }
-
             const query = `DELETE FROM users WHERE id = ?`;
-            this.dbConnection.run(query, [id], function (err) {
-                if (err) {
-                    reject(err);
-                } else if (this.changes > 0) {
-                    resolve("Usuário deletado " + id);
+            this.dbConnection.run(query, [id], function () {
+                if (this.changes === 0) {
+                    reject("Nenhum usuário encontrado com o ID " + id);
                 } else {
-                    resolve("Nenhum usuário encontrado com o ID " + id);
+                    resolve("Usuário deletado " + id);
                 }
             });
         });
@@ -74,9 +67,9 @@ class userService {
         if (verificationOfFormAtributes(listOfAtributes)) {
             return new Promise((resolve, reject) => {
                 const query = 'UPDATE users SET username = ?, email = ?, bio = ? WHERE id = ?';
-                this.dbConnection.run(query, listOfAtributes, function (err) {
+                this.dbConnection.run(query, listOfAtributes, function () {
                     if (this.changes === 0) {
-                        reject({ error: 'Erro desconhecido' });
+                        reject({ error: "User not found" });
                     } else {
                         resolve({ msg: 'Usuário alterado' });
                     }

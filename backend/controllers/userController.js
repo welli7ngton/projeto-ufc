@@ -44,12 +44,11 @@ export function deleteUser(req, res) {
     }
 
     userServices.deleteUser(userId).then(msg => {
-        res.json({
+        res.status(200).json({
             msg: msg
         });
     }).catch(error => {
-        res.status(500).json({
-            msg: 'Erro ao deletar o usuário',
+        res.status(404).json({
             error: error
         });
     });
@@ -66,7 +65,7 @@ export async function updateProfile(req, res) {
         )
         res.status(200).json({user: user })
     } catch (error) {
-        res.status(500).json({
+        res.status(404).json({
             error: error
         });
     }

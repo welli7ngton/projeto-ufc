@@ -63,7 +63,8 @@ export default {
 
         const movieData = await movieResponse.json();
         const creditsData = await creditsResponse.json();
-
+        
+        // TODO: refatorar e remover essa repetição de código, muitos atributos repetidos
         this.movieDetails = {
           idTMDB: this.movieId || '',
           title: movieData.title || '',
@@ -91,26 +92,20 @@ export default {
             country: this.movieDetails.country,
             imdbRating: this.movieDetails.imdbRating
           }, { timeout: 10000 })
-            .then(response => {
-              if (response.data.success) {
-                this.successMessage = response.data.message;
-                this.errorMessage = '';
-              } else {
-                this.errorMessage = response.data.message;
-                this.successMessage = '';
-              }
+            .then(movieResponse => {
+              console.log(movieResponse.statusText)
+              // TODO: criar spam ou arranjar qualquer forma de mostrar uma mensagem de sucesso ao cadastrar um filme.
             })
             .catch(error => {
               console.error('Erro ao adicionar filme:', error);
               this.errorMessage = error.response ? error.response.data.message : 'Erro ao tentar adicionar o filme. Verifique a conexão ou tente novamente mais tarde.';
-              this.successMessage = '';
             });
-        }
 
+          }
+          
       } catch (error) {
         console.error('Error fetching movie details or adding to database:', error);
         this.errorMessage = 'Erro ao buscar detalhes do filme ou adicionar ao banco de dados.';
-        this.successMessage = '';
       }
     },
     getDirector(crew) {
